@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+  <!-- REST APIs -->
+  <servlet>
+    <servlet-name>GET_LoadConfigurationCities</servlet-name>
+    <servlet-class>com.google.cloud.demo.iot.nirvana.servlet.rest.GetLoadConfigurationCities</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GET_LoadConfigurationCities</servlet-name>
+    <url-pattern>/rest/loadConfigurationCities</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GET_CityTemperature</servlet-name>
+    <servlet-class>com.google.cloud.demo.iot.nirvana.servlet.rest.GetCityTemperature</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GET_CityTemperature</servlet-name>
+    <url-pattern>/rest/cityTemperature</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GET_City</servlet-name>
+    <servlet-class>com.google.cloud.demo.iot.nirvana.servlet.rest.GetCity</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GET_City</servlet-name>
+    <url-pattern>/rest/city</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GCE_InstanceCreation</servlet-name>
+    <servlet-class>com.google.cloud.demo.iot.nirvana.servlet.rest.GetPostGce</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GCE_InstanceCreation</servlet-name>
+    <url-pattern>/rest/gce/instance</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GCE_InstanceRemoval</servlet-name>
+  <servlet-class>com.google.cloud.demo.iot.nirvana.servlet.rest.PostGceRemoval</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GCE_InstanceRemoval</servlet-name>
+    <url-pattern>/rest/gce/instance/removal</url-pattern>
+  </servlet-mapping>
+
+  <!-- TASKS -->
+  <servlet>
+    <servlet-name>Task_GCE_InstanceCreation</servlet-name>
+    <servlet-class>com.google.cloud.demo.iot.nirvana.servlet.rest.task.gce.InstanceCreation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Task_GCE_InstanceCreation</servlet-name>
+    <url-pattern>/task/gce/instance/creation</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Task_GCE_InstanceRemoval</servlet-name>
+    <servlet-class>com.google.cloud.demo.iot.nirvana.servlet.rest.task.gce.InstanceRemoval</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Task_GCE_InstanceRemoval</servlet-name>
+    <url-pattern>/task/gce/instance/removal</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Task_CloudIoTCore_DeviceRemoval</servlet-name>
+    <servlet-class>com.google.cloud.demo.iot.nirvana.servlet.rest.task.cloudiotcore.DeviceRemoval</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Task_CloudIoTCore_DeviceRemoval</servlet-name>
+    <url-pattern>/task/cloudiotcore/device/removal</url-pattern>
+  </servlet-mapping>
+
+  <!-- Filters -->
+  <filter>
+    <filter-name>ObjectifyFilter</filter-name>
+    <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+  </filter>
+
+  <!-- Filters mapping -->
+  <filter-mapping>
+    <filter-name>ObjectifyFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!-- Security Constraints -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>all-pages</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>SSL</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+
+  <!-- Welcome file list -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>
